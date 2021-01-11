@@ -1,0 +1,24 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #efefef;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+blockquote p:before { 
+  content: open-quote;
+  font-weight: bold;
+  font-size:35px;
+  color:#aaa;
+  } 
+  blockquote p:after { 
+  content: close-quote;
+  font-weight: bold;
+  font-size:35px;
+  color:#aaa;
+    
+  }

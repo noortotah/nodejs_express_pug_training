@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  
+  .container
+    .row
+        .col-8.mx-auto.mt-5
+            ul.list-group
+                each user, index in users
+                    li.list-group-item.mb-3
+                        .card.border-0.flex-row.flex-wrap.h-100.justify-content-center.align-items-center
+                            .border-0 
+                                img(style="height: 100px" src= user.img , alt= user.name) 
+                            .card-block.px-2
+                                .card-title.h5.p-2.mr-auto.col #{ user.name }
+                                p.p-2   age: #{user.age}
+                            .card-block.px-2.ml-auto.col-6    
+                                a.btn.btn-success.btn-block(href="/users/" + (+index + 1) ) View Profile
+
+                            .w-100
+                        //- = index + ': ' + val
