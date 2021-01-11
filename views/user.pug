@@ -5,10 +5,10 @@ block content
   .container
     .row
         .col
-            a.btn.btn-warning.ml-auto(href="/users") BACK TO LIST
+            a.btn.btn-warning.ml-auto(href=db? "/db/users": "/users") BACK TO LIST
             .float-right
-                a.btn.btn-secondary.mr-2(href="/users/" + (id - 1) ) PREV
-                a.btn.btn-primary(href="/users/" + (id + 1) ) NEXT
+                a.btn.btn-secondary.mr-2(href=db? "/db/users/" + (id - 1) :"/users/" + (id - 1) ) PREV
+                a.btn.btn-primary(href=db? "/db/users/" + (id + 1): "/users/" + (id + 1) ) NEXT
                 
     .row
         .col-5.mx-auto.mt-5
@@ -19,13 +19,16 @@ block content
                     blockquote.blockquote
                         p.mb-0.text-center  #{user.age}
                     p.card-text.p-3.text-center  Some quick example text to build on the card title and make up the bulk of the card's content.
-                .card-footer
-                    p.text-center Hobbies
-                    ul.list-inline.row.d-flex.justify-content-center
-                        each val, index in user.hobbies
-                            li.list-inline-item
-                                p.btn(class=index%2  ? "btn-outline-success" : "btn-outline-danger")(class=index%3  ? "btn-outline-warning" : "btn-outline-secondary") #{val}
-                        
+                
+                if user.hobbies.length
+                    .card-footer
+                        p.text-center Hobbies
+                        ul.list-inline.row.d-flex.justify-content-center
+                            
+                            each val, index in user.hobbies
+                                li.list-inline-item
+                                    p.btn(class=index%2  ? "btn-outline-success" : "btn-outline-danger")(class=index%3  ? "btn-outline-warning" : "btn-outline-secondary") #{val}
+                            
                 
 
          

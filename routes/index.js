@@ -44,16 +44,21 @@ router.get('/db/users/:id', function(req, res, next) {
   dbConnect.connect( (err) => {
     let sql = `SELECT users.*, GROUP_CONCAT(DISTINCT hobbies.name) as hobbies
             FROM users
-            inner join users_hobbies
+            LEFT join users_hobbies
             on users_hobbies.user_id = users.id
-            inner join hobbies
+            LEFT join hobbies
             on users_hobbies.hobby_id = hobbies.id
             where users.id = ` + +req.params.id +`
             GROUP BY user_id;
             `;
     dbConnect.query(sql , (err, user) => {
-      user[0].hobbies = (user[0].hobbies).split(',');
-      if(user) res.render('user', { user: user[0] , id : +req.params.id  });
+      if(!user.length) {
+        res.redirect('/db/users');
+      }else{
+        user[0].hobbies = user[0].hobbies ? (user[0].hobbies).split(',') : [];
+        if(user) res.render('user', { user: user[0] , id : +req.params.id , db: true });
+      }
+      
     })
   })
   
@@ -62,14 +67,15 @@ router.get('/db/users/:id', function(req, res, next) {
 
 /* GET users listing. */
 router.get('/db/users', function(req, res, next) {
-  let sql = `SELECT users.*, GROUP_CONCAT(DISTINCT hobbies.name) as hobbies
+  let sql = `SELECT users.* , group_concat(distinct hobbies.name)
             FROM users
-            inner join users_hobbies
+            
+            left join users_hobbies
             on users_hobbies.user_id = users.id
-            inner join hobbies
+            
+            left join hobbies
             on users_hobbies.hobby_id = hobbies.id
-            GROUP BY user_id;
-            `;
+            GROUP BY users.id;`;
   dbConnect.connect( (err) => {
     dbConnect.query( sql , (err, users) => {
       if(users) res.render('users', { users: users, db: true });
