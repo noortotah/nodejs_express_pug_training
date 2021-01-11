@@ -52,9 +52,7 @@ router.get('/db/users/:id', function(req, res, next) {
             GROUP BY user_id;
             `;
     dbConnect.query(sql , (err, user) => {
-      console.log('--------------------')
       user[0].hobbies = (user[0].hobbies).split(',');
-      console.log(user[0]);
       if(user) res.render('user', { user: user[0] , id : +req.params.id  });
     })
   })
@@ -74,7 +72,7 @@ router.get('/db/users', function(req, res, next) {
             `;
   dbConnect.connect( (err) => {
     dbConnect.query( sql , (err, users) => {
-      if(users) res.render('users', { users: users });
+      if(users) res.render('users', { users: users, db: true });
     })
   })
 });
