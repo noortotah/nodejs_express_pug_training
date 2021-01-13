@@ -2,14 +2,15 @@ var express = require('express');
 const fs = require('fs');
 var router = express.Router();
 
-const mysql = require('mysql');
+var dbConnect = require('../db');
+// const mysql = require('mysql');
 
-var dbConnect = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'rootroot',
-    database: 'usersData'
-});
+// var dbConnect = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'rootroot',
+//     database: 'usersData'
+// });
 
 
 /* GET home page. */
