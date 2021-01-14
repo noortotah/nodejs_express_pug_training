@@ -17,6 +17,10 @@ retrieve data from mysql db
 http://localhost:3000/db/users
 http://localhost:3000/db/users/1
 
+
+insert into mongodb from json
+http://localhost:3000/mongo/users/insert/josn-users
+
 # How the app looks
 ![INDEX PAGE](public/images/list.png?raw=true "List Page")
 

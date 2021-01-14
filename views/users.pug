@@ -1,3 +1,4 @@
+
 extends layout
 
 block content
@@ -19,7 +20,9 @@ block content
                                 p.p-2   age: #{user.age}
                             .card-block.px-2.ml-auto.col-6   
                                 h1 
+                                if db 
+                                    button.btn.btn-danger.btn-block(type="submit", onclick="deleteProfile(event)" ) Delete
                                 a.btn.btn-success.btn-block(href=db? "/db/users/" + (+index + 1) : "/users/" + (+index + 1) ) View Profile
 
-                            .w-100
-                        //- = index + ': ' + val
+                           
+    script(src="/javascripts/all.js")
